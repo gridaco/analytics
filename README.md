@@ -10,3 +10,8 @@ Bridged internal analytics components
 ```
 yarn add @internal.bridged.xyz/analytics
 ```
+
+
+
+## Proxy analytics server
+proxy analytics is a analytics data proxy service that could run on google analytics or bridged analytics for sdk non-supported platforms. e.g. iframe and embedded
