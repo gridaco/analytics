@@ -1,0 +1,21 @@
+{
+  "name": "@analytics.bridged.xyz/google-analytics-component",
+  "version": "0.0.1",
+  "description": "Bridged internal analytics components",
+  "main": "index.js",
+  "repository": "https://github.com/bridgedxyz/analytics.git",
+  "author": "Bridged xyz authors, softmarshmallow",
+  "license": "MIT",
+  "private": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "prepack": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  }
+}
