@@ -8,6 +8,6 @@ Bridged internal analytics components
 
 ## Packages
 
-- @analytics.bridged.xyz/utils - analytics related utilities
-- @analytics.bridged.xyz/google-analytics-component - google-analytics component used by bridged, open for general usage.
-- @analytics.bridged.xyz/internal (bridged internal analytics type definitions - in general, you don't have a reason to use this.)
+- `@analytics.bridged.xyz/utils` - analytics related utilities
+- `@analytics.bridged.xyz/google-analytics-component` - google-analytics component used by bridged, open for general usage.
+- `@analytics.bridged.xyz/internal` (bridged internal analytics type definitions - in general, you don't have a reason to use this.)
