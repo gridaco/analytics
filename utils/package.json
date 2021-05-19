@@ -1,14 +1,10 @@
 {
-  "name": "@internal.bridged.xyz/analytics",
+  "name": "@analytics.bridged.xyz/utils",
   "version": "0.0.0",
   "description": "Bridged internal analytics components",
+  "main": "index.js",
   "repository": "https://github.com/bridgedxyz/analytics.git",
   "author": "Bridged xyz authors, softmarshmallow",
   "license": "MIT",
-  "private": true,
-  "workspaces": [
-    "internal",
-    "google-analytics",
-    "utils"
-  ]
+  "private": false
 }
