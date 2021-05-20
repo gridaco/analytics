@@ -1,13 +1,21 @@
 {
   "name": "@analytics.bridged.xyz/internal",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Bridged internal analytics components",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": "https://github.com/bridgedxyz/analytics.git",
-  "author": "Bridged xyz authors, softmarshmallow",
+  "author": "internal.bridged.xyz authors, softmarshmallow",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "prepack": "tsc"
+  },
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "otplib": "^12.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^15.3.1",
+    "typescript": "^4.2.4"
   }
 }
