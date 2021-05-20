@@ -1,6 +1,6 @@
 {
   "name": "@analytics.bridged.xyz/internal",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Bridged internal analytics components",
   "main": "dist/index.js",
   "repository": "https://github.com/bridgedxyz/analytics.git",
