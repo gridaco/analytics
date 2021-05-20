@@ -1,6 +1,6 @@
 {
   "name": "@analytics.bridged.xyz/google-analytics-component",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Bridged internal analytics components",
   "main": "dist/index.js",
   "repository": "https://github.com/bridgedxyz/analytics.git",
