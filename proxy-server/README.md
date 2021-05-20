@@ -1,4 +1,8 @@
-# Serverless - AWS Node.js Typescript
+# Simple analytics proxy server
+
+This logs analytics event using google analytics measyrement 4. for ga non supported platforms.
+
+## Template - Serverless - AWS Node.js Typescript
 
 This project has been generated using the `aws-nodejs-typescript` template from the [Serverless framework](https://www.serverless.com/).
 

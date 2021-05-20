@@ -5,6 +5,7 @@
   "main": "serverless.ts",
   "scripts": {
     "start": "sls offline start",
+    "deploy:prod": "sls deploy --stage production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

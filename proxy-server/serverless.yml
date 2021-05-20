@@ -1,13 +1,13 @@
-service:
-  name: serverless
+service: internal-analytics-proxy
 custom:
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
+    packager: "yarn"
   customDomain:
-    domainName: cors.bridged.cc
-    basePath: ""
-    stage: ${self:provider.stage}
+    domainName: analytics.internal.bridged.cc
+    basePath: "proxy"
+    stage: production
     createRoute53Record: true
   serverless-offline:
     httpPort: 4013
@@ -19,10 +19,9 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
+  region: us-west-1
   apiGateway:
     minimumCompressionSize: 1024
-  environment:
-    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
 functions:
   event:
     handler: handler.handle

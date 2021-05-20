@@ -7,6 +7,7 @@
   "author": "Bridged xyz authors, softmarshmallow",
   "license": "MIT",
   "private": false,
+  "type": "module",
   "files": [
     "dist",
     "README.md",
