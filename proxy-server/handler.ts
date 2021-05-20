@@ -1,6 +1,6 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
 import { authenticator, totp } from "otplib";
-
+import { ga4 } from "@analytics.bridged.xyz/google-analytics-component";
 import serverless from "serverless-http";
 import express, { Request, Response } from "express";
 
@@ -32,6 +32,13 @@ const TOTP_GUARD = function (req, res, next) {
   }
 };
 
+function loagGa4ApiSecret(app: string): string {
+  return process.env[`GA4_API_SECRET_STREAM_${app}`];
+}
+function loadGa4MeasurementId(app: string): string {
+  return process.env[`GA4_MEASUREMENT_ID_${app}`];
+}
+
 /**
  * OTP Middleware - prevent anonymous app from calling the api
  */
@@ -44,8 +51,31 @@ app.get("/status", (req: Request, res: Response) => {
   res.send({ message: "Server is running" });
 });
 
-analyticsApp.post("/event", (req: Request, res: Response) => {
-  res.send({ message: "Your app is valid to use analytics proxy api" });
+analyticsApp.post("/event", async (req: Request, res: Response) => {
+  const data = req.body as {
+    appid: string;
+    name: string;
+    clientid: string;
+    params: string;
+  };
+
+  const _evRes = await ga4.event({
+    api_secret: loagGa4ApiSecret(data.appid),
+    measurement_id: loadGa4MeasurementId(data.appid),
+    client_id: data.clientid,
+    events: [
+      {
+        name: data.name,
+        params: JSON.parse(data.params),
+      },
+    ],
+  });
+
+  if (_evRes.ok) {
+    res.send(1);
+  } else {
+    res.status(400).send(_evRes.error);
+  }
 });
 
 analyticsApp.get("/status", (req, res) => {
