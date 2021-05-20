@@ -25,3 +25,26 @@ export function event_selection_to_code(params: {
     },
   });
 }
+
+export function event_click_copy_code() {
+  event({
+    name: "click_copy_code",
+    params: {},
+  });
+}
+
+export function event_click_quicklook() {
+  event({
+    name: "click_quicklook",
+    params: {},
+  });
+}
+
+export function event_load_icon(params: { icon_name: string }) {
+  event({
+    name: "load_icon",
+    params: {
+      icon_name: params.icon_name,
+    },
+  });
+}
