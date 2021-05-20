@@ -1,8 +1,8 @@
 {
   "name": "@analytics.bridged.xyz/google-analytics-component",
-  "version": "0.0.2",
+  "version": "0.0.6",
   "description": "Bridged internal analytics components",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": "https://github.com/bridgedxyz/analytics.git",
   "author": "Bridged xyz authors, softmarshmallow",
   "license": "MIT",
@@ -17,5 +17,8 @@
   },
   "devDependencies": {
     "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.1"
   }
 }
