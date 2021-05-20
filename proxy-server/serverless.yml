@@ -6,7 +6,7 @@ custom:
     packager: "yarn"
   customDomain:
     domainName: analytics.internal.bridged.cc
-    basePath: "proxy"
+    basePath: ""
     stage: production
     createRoute53Record: true
   serverless-offline:

@@ -6,5 +6,8 @@
   "repository": "https://github.com/bridgedxyz/analytics.git",
   "author": "Bridged xyz authors, softmarshmallow",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
 }

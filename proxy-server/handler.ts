@@ -1,8 +1,9 @@
-import { APIGatewayProxyHandler } from "aws-lambda";
-import { authenticator, totp } from "otplib";
+import { totp } from "otplib";
 import { ga4 } from "@analytics.bridged.xyz/google-analytics-component";
 import serverless from "serverless-http";
 import express, { Request, Response } from "express";
+import { nanoid } from "nanoid";
+import bodyParser from "body-parser";
 
 const TOTP_SECRET =
   process.env.BRIDGED_FIRST_PARTY_ANALYTICS_PROXY_SERVICE_TOTP_SECRET;
@@ -33,10 +34,10 @@ const TOTP_GUARD = function (req, res, next) {
 };
 
 function loagGa4ApiSecret(app: string): string {
-  return process.env[`GA4_API_SECRET_STREAM_${app}`];
+  return process.env[`GA4_API_SECRET_STREAM_${app?.toUpperCase()}`];
 }
 function loadGa4MeasurementId(app: string): string {
-  return process.env[`GA4_MEASUREMENT_ID_${app}`];
+  return process.env[`GA4_MEASUREMENT_ID_${app?.toUpperCase()}`];
 }
 
 /**
@@ -44,6 +45,7 @@ function loadGa4MeasurementId(app: string): string {
  */
 analyticsApp.use(TOTP_GUARD);
 devApp.use(DEVELOPMENT_GUARD);
+app.use(bodyParser.json());
 app.use("/analytics", analyticsApp);
 app.use("/development", devApp);
 
@@ -53,26 +55,32 @@ app.get("/status", (req: Request, res: Response) => {
 
 analyticsApp.post("/event", async (req: Request, res: Response) => {
   const data = req.body as {
-    appid: string;
+    app: string;
     name: string;
-    clientid: string;
-    params: string;
+    client_id?: string;
+    params?: {} | object;
   };
 
+  console.log("data", data);
+
+  const _api_secret = loagGa4ApiSecret(data.app);
+  const _measurement_id = loadGa4MeasurementId(data.app);
+
+  console.log(_api_secret, _measurement_id);
   const _evRes = await ga4.event({
-    api_secret: loagGa4ApiSecret(data.appid),
-    measurement_id: loadGa4MeasurementId(data.appid),
-    client_id: data.clientid,
+    api_secret: _api_secret,
+    measurement_id: _measurement_id,
+    client_id: data.client_id ?? nanoid(),
     events: [
       {
         name: data.name,
-        params: JSON.parse(data.params),
+        params: data.params ?? {},
       },
     ],
   });
 
   if (_evRes.ok) {
-    res.send(1);
+    res.status(202).send();
   } else {
     res.status(400).send(_evRes.error);
   }

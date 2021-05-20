@@ -20,7 +20,7 @@ export async function event(
   }
 ): Promise<GA4EventResult> {
   // pre validate request
-  if (!!!ev.api_secret || !!!ev.measurement_id) {
+  if (!(ev.api_secret !== undefined && ev.measurement_id !== undefined)) {
     throw "both api_secret and measurement_id must be provided";
   }
 

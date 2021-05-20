@@ -1,13 +1,12 @@
 {
   "name": "@analytics.bridged.xyz/google-analytics-component",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "description": "Bridged internal analytics components",
   "main": "dist/index.js",
   "repository": "https://github.com/bridgedxyz/analytics.git",
   "author": "Bridged xyz authors, softmarshmallow",
   "license": "MIT",
   "private": false,
-  "type": "module",
   "files": [
     "dist",
     "README.md",
