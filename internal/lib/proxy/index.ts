@@ -64,7 +64,7 @@ export async function event(
     // build url with cors
     const _url =
       `${
-        _PROXY_CORS_PROXY_HOST ? _PROXY_CORS_PROXY_HOST : ""
+        _PROXY_CORS_PROXY_HOST ? _PROXY_CORS_PROXY_HOST + "/" : ""
       }${PROXY_ANALYTICS_BASE_URL}` + "/analytics/event";
 
     const _ev_res = await Axios.post(
