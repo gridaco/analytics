@@ -1,0 +1,35 @@
+service:
+  name: serverless
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+  customDomain:
+    domainName: cors.bridged.cc
+    basePath: ""
+    stage: ${self:provider.stage}
+    createRoute53Record: true
+  serverless-offline:
+    httpPort: 4013
+plugins:
+  - serverless-webpack
+  - serverless-offline
+  - serverless-domain-manager
+  - serverless-dotenv-plugin
+provider:
+  name: aws
+  runtime: nodejs12.x
+  apiGateway:
+    minimumCompressionSize: 1024
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+functions:
+  event:
+    handler: handler.handle
+    events:
+      - http:
+          method: any
+          path: /{proxy+}
+      - http:
+          method: GET
+          path: /
