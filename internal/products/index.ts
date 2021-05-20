@@ -1,1 +1,1 @@
-export const ASSISTANT_DUMMY = "";
+export * as assistant from "./assistant";

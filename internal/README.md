@@ -12,3 +12,17 @@ We don't collect any suspicious data. All the general events/data we collect is 
 ## Proxy analytics server
 
 proxy analytics is a analytics data proxy service that could run on google analytics or bridged analytics for sdk non-supported platforms. e.g. iframe and embedded
+
+## Usage
+
+> This package is designed for singleton client usage. we are currently adopting functions and global variable patterns to keep it simple as possible.
+
+```ts
+import { assistant as analytics } from "analytics";
+analytics.initWithProxy(secret); // with proxy
+analytics.eventData();
+analytics.event();
+analytics.event_a();
+analytics.set();
+analytics.get();
+```
