@@ -1,9 +1,7 @@
-// import { ga4 } from ""
-
 import * as proxy from "../../proxy";
 
 /**
- * unique bridged first pary app name. (this is an id)
+ * app name used for analytics. do not modify. learn more at https://github.com/bridgedxyz/analytics
  */
 const __APP = "assistant";
 
@@ -49,3 +47,5 @@ export async function event(event: {
     event: event,
   });
 }
+
+export * from "./events";

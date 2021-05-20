@@ -1,8 +1,7 @@
 import Axios from "axios";
 import { totp } from "otplib";
 
-const PROXY_ANALYTICS_BASE_URL =
-  "https://https://analytics.internal.bridged.cc";
+const PROXY_ANALYTICS_BASE_URL = "https://analytics.internal.bridged.cc";
 
 /**
  * [GLOBAL] global variable for saving totp secret for authenticating anonymous user and allowing only first party bridged apps to access the analytics api.
@@ -14,10 +13,6 @@ let _TOTP_AUTHENTICATION_SECRET: string;
  * CORS proxy host for this proxy analytics request. since the proxy analytics is mostly used by embedded platforms, we are providing cors option in the box.
  */
 let _PROXY_CORS_PROXY_HOST: string;
-
-const axios = Axios.create({
-  baseURL: PROXY_ANALYTICS_BASE_URL,
-});
 
 export function initTotpSecret(secret: string) {
   _TOTP_AUTHENTICATION_SECRET = secret;
@@ -65,8 +60,15 @@ export async function event(
 
   try {
     const _token = _makeToken();
-    const _ev_res = await axios.post(
-      "/analytics/event",
+
+    // build url with cors
+    const _url =
+      `${
+        _PROXY_CORS_PROXY_HOST ? _PROXY_CORS_PROXY_HOST : ""
+      }${PROXY_ANALYTICS_BASE_URL}` + "/analytics/event";
+
+    const _ev_res = await Axios.post(
+      _url,
       {
         app: app,
         name: event.name,
@@ -77,17 +79,13 @@ export async function event(
           token: _token,
         },
 
-        // region cors setting
+        // cors header setting https://github.com/bridgedxyz/base/issues/21
         headers: _PROXY_CORS_PROXY_HOST && {
           origin: `https://${app}.bridged.xyz`,
         },
-        proxy: _PROXY_CORS_PROXY_HOST && {
-          host: _PROXY_CORS_PROXY_HOST,
-          port: 443,
-        },
-        // endregion cors setting
       }
     );
+
     return _ev_res.data;
   } catch (_) {
     if (options?.warn !== false) {
