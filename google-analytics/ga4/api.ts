@@ -1,8 +1,9 @@
 import { ga4 } from "..";
-
+import fetch from "node-fetch";
 export interface GA4EventResult {
   ok: boolean;
   error?: string;
+  message?: string;
 }
 
 /**
@@ -18,6 +19,11 @@ export async function event(
     dubug?: boolean;
   }
 ): Promise<GA4EventResult> {
+  // pre validate request
+  if (!!!ev.api_secret || !!!ev.measurement_id) {
+    throw "both api_secret and measurement_id must be provided";
+  }
+
   const _isdebug = options?.dubug === true;
 
   const _requestBaseUrl = _isdebug
@@ -29,20 +35,15 @@ export async function event(
       {
         method: "POST",
         body: JSON.stringify({
-          client_id: "XXXXXXXXXX.YYYYYYYYYY",
-          events: [
-            {
-              // Event names must start with an alphabetic character.
-              name: "_badEventName",
-              params: {},
-            },
-          ],
+          client_id: ev.client_id,
+          events: ev.events,
         }),
       }
     );
     if (_reqres.status >= 200 && _reqres.status < 300) {
       return <GA4EventResult>{
         ok: true,
+        // message: _reqres.
       };
     } else {
       return <GA4EventResult>{
