@@ -61,12 +61,8 @@ analyticsApp.post("/event", async (req: Request, res: Response) => {
     params?: {} | object;
   };
 
-  console.log("data", data);
-
   const _api_secret = loagGa4ApiSecret(data.app);
   const _measurement_id = loadGa4MeasurementId(data.app);
-
-  console.log(_api_secret, _measurement_id);
   const _evRes = await ga4.event({
     api_secret: _api_secret,
     measurement_id: _measurement_id,
