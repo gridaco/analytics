@@ -17,7 +17,7 @@ export function initWithProxy(secret: string) {
  * enables cors proxy also.
  */
 export function initWithCors() {
-  // uses cors.bridged.cc by default.
+  proxy.initCors();
 }
 
 /**
