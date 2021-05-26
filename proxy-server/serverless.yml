@@ -18,6 +18,8 @@ plugins:
   - serverless-dotenv-plugin
 provider:
   name: aws
+  timeout: 3
+  memory: 128
   runtime: nodejs12.x
   region: us-west-1
   apiGateway:
