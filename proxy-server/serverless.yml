@@ -31,6 +31,9 @@ functions:
       - http:
           method: any
           path: /{proxy+}
+          cors:
+            origin: "*"
+            allowCredentials: false
       - http:
           method: GET
           path: /

@@ -4,7 +4,7 @@ import serverless from "serverless-http";
 import express, { Request, Response } from "express";
 import { nanoid } from "nanoid";
 import bodyParser from "body-parser";
-import { cors } from "cors";
+import cors from "cors";
 
 const TOTP_SECRET =
   process.env.BRIDGED_FIRST_PARTY_ANALYTICS_PROXY_SERVICE_TOTP_SECRET;
@@ -50,7 +50,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use("/analytics", analyticsApp);
 app.use("/development", devApp);
-
 app.get("/status", (req: Request, res: Response) => {
   res.send({ message: "Server is running" });
 });
