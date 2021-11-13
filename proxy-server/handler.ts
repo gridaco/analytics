@@ -4,6 +4,7 @@ import serverless from "serverless-http";
 import express, { Request, Response } from "express";
 import { nanoid } from "nanoid";
 import bodyParser from "body-parser";
+import { cors } from "cors";
 
 const TOTP_SECRET =
   process.env.BRIDGED_FIRST_PARTY_ANALYTICS_PROXY_SERVICE_TOTP_SECRET;
@@ -45,6 +46,7 @@ function loadGa4MeasurementId(app: string): string {
  */
 analyticsApp.use(TOTP_GUARD);
 devApp.use(DEVELOPMENT_GUARD);
+app.use(cors());
 app.use(bodyParser.json());
 app.use("/analytics", analyticsApp);
 app.use("/development", devApp);
